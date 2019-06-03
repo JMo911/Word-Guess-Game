@@ -8,3 +8,18 @@ var country_facts = ["8,751,820 people live in Austria. German is the official l
 "The Spanish name for Spain is España. The Spanish National Anthem has no actual lyrics.",
 "The capital city of Switzerland is Bern. The people speak German, French, Italian and Romansch.",
 "The US is the 4th largest country in the world by land area and 3rd by population. Hawaii is the most recent of the 50 states in the US (joining in 1959)."]
+
+
+
+
+
+function random_countries (countries) {
+    return countries[Math.floor(Math.random()*countries.length)];   
+}
+
+console.log(random_countries(countries));
+
+var current_term = random_countries(countries)
+var current_length = current_term.length
+var current_position = countries.lastIndexOf(current_term)
+var current_fact = country_facts[current_position]
