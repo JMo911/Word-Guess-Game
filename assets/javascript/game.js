@@ -19,7 +19,11 @@ function random_countries (countries) {
 
 console.log(random_countries(countries));
 
-var current_term = random_countries(countries)
-var current_length = current_term.length
-var current_position = countries.lastIndexOf(current_term)
-var current_fact = country_facts[current_position]
+var current_term = random_countries(countries);
+var current_length = current_term.length;
+var current_position = countries.lastIndexOf(current_term);
+var current_fact = country_facts[current_position];
+
+function import_current_term() {
+    document.getElementById("current_term_display").innerHTML = current_term;
+  }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body>
+<body onclick="import_current_term()">
         <!--Container-->
         <div class="container-fluid">
 
@@ -33,6 +33,7 @@
             <div class="col-xs-6 col-md-6 col-xl-6 text-center">
                 <h2>Press any key to get started!</h2>
                 <h3>Wins:</h3>
+                <h3 id="current_term_display"></h3>
                 <h3>Number of Guesses Remaining:</h3>
                 <h3>Letters Already Guessed:</h3>
             </div>
