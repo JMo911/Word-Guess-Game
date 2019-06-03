@@ -20,7 +20,7 @@ var country_pics = ["assets/images/Austria.jpeg",
 
 
 function random_countries (countries) {
-    return countries[Math.floor(Math.random()*countries.length)];   
+    return countries[Math.floor(Math.random()*countries.length-1)];   
 }
 
 console.log(random_countries(countries));
