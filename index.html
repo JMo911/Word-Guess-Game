@@ -8,9 +8,9 @@
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body onclick="import_current_term()">
+<body onclick="import_current_term(); import_current_fact(); myFunction();import_current_pic()">
         <!--Container-->
-        <div class="container-fluid">
+        <div class="container-fluid"> 
 
         <!--ROW 1-->   
         <div class="row col-lg-12 justify-content-center">
@@ -28,6 +28,8 @@
         <!--Rotating pics & facts-->    
             <div class="col-xs-6 col-md-6 col-xl-6 text-center">
                 <img src="assets/images/World Map.jpeg">
+                <img src="#" id="country_pic">
+                <h3 id="country_fact"></h3>
             </div>
         <!--Game--> 
             <div class="col-xs-6 col-md-6 col-xl-6 text-center">

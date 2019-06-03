@@ -9,7 +9,13 @@ var country_facts = ["8,751,820 people live in Austria. German is the official l
 "The capital city of Switzerland is Bern. The people speak German, French, Italian and Romansch.",
 "The US is the 4th largest country in the world by land area and 3rd by population. Hawaii is the most recent of the 50 states in the US (joining in 1959)."]
 
-
+var country_pics = ["assets/images/Austria.jpeg",
+"assets/images/Costa Rica.jpeg",
+"assets/images/Egypt.jpeg",
+"assets/images/India.jpeg",
+"assets/images/Spain.jpeg",
+"assets/images/Switzerland.jpeg",
+"assets/images/United States of America.jpeg"]
 
 
 
@@ -23,7 +29,26 @@ var current_term = random_countries(countries);
 var current_length = current_term.length;
 var current_position = countries.lastIndexOf(current_term);
 var current_fact = country_facts[current_position];
+var current_pic = country_pics[current_position];
+
 
 function import_current_term() {
     document.getElementById("current_term_display").innerHTML = current_term;
+  }
+
+  function import_current_fact() {
+    document.getElementById("country_fact").innerHTML = current_fact;
+  }  
+
+
+  function import_current_pic() {
+    document.getElementById("country_pic").src = current_pic;
+  }  
+
+//   Testing section - code above works
+
+function myFunction() {
+    var term = document.getElementById("current_term_display").innerHTML; 
+    var res = term.replace(/a/gi, "-");
+    document.getElementById("current_term_display").innerHTML = res;
   }
