@@ -49,6 +49,6 @@ function import_current_term() {
 
 function myFunction() {
     var term = document.getElementById("current_term_display").innerHTML; 
-    var res = term.replace(/a/gi, "-");
+    var res = term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
     document.getElementById("current_term_display").innerHTML = res;
   }
