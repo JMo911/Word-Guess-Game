@@ -19,7 +19,7 @@ var country_pics = ["assets/images/Austria.jpeg",
 
 
 
-function random_countries (countries) {
+function random_countries (jacob) {
     return countries[Math.floor(Math.random()*countries.length-1)];   
 }
 
@@ -34,6 +34,8 @@ var current_pic = country_pics[current_position];
 
 function import_current_term() {
     document.getElementById("current_term_display").innerHTML = current_term;
+    document.getElementById("country_fact").innerHTML = current_fact;
+
   }
 
   function import_current_fact() {
@@ -52,3 +54,22 @@ function myFunction() {
     var res = term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
     document.getElementById("current_term_display").innerHTML = res;
   }
+
+document.onkeyup = function (event){
+  var key_code = event.keyCode;
+  var user_input =  String.fromCharCode(key_code);
+  console.log(user_input);
+}
+
+
+// function start_game (event){
+//   var wins = 0;
+//   var losses = 0;
+
+// }
+
+// // onkeyup decrement guesses
+
+// function while_game (event) {
+
+// }
