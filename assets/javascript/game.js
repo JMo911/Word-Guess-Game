@@ -28,16 +28,31 @@ window.onpageshow = function (gameset) {
   
 }
 
+
+
+
+
+
+
+
+
+
 // INITIATE GAME
 
 document.onkeyup = function(gamerun) {
 
-  // GET EVERY CHARACTER FROM CURRENT TERM, ASSIGN # GUESSES & TRACK USER INPUT
+  //STORE USER INPUT,    
   var user_guess = event.key;
-  var split_term = current_term.toLowerCase().split("");
-  var number_of_guesses = 2 * split_term.length;
-  var previous_guesses=[];
 
+  // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
+  var split_term = current_term.toLowerCase().split("");
+  // CREATE ARRAY TO COLLECT PREVIOUS GUESSES
+  var previous_guesses=[];
+  // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
+  var number_of_guesses = 2 * split_term.length;
+  
+
+// SEE IF USER GUESS MATCHES ANY OF THE LETTERS IN THE CURRENT WORD, THEN DISPLAY THOSE MATCHES IN BROWSER
 
   for (var i = 0; i < split_term.length; i++) {
     if (user_guess === split_term[i]) {
@@ -47,13 +62,18 @@ document.onkeyup = function(gamerun) {
     
   }
 
+
+  //STORE INCORRECT GUESSES IN THE PREVIOUS GUESSES BANK
   if (split_term.indexOf(user_guess) === -1) {
     previous_guesses.push(user_guess);
-    document.getElementById("previous_guesses_container").innerHTML = user_guess;
+    document.getElementById("previous_guesses_container").innerHTML = previous_guesses;
   }
 
 
 
+  
+
+}
 
 
 
@@ -87,7 +107,7 @@ document.onkeyup = function(gamerun) {
 
       // var position = current_term.indexOf(user_guess);
     // var ghost_split = ghost_term.split("");
-  }
+  
   
 
 
