@@ -43,6 +43,9 @@ document.onkeyup = function (game) {
     if (user_guess === split_term[i]) {
       ghost_split[i] = user_guess;
       document.getElementById("current_term_display").innerHTML = ghost_split.join("");
+    } 
+    else {
+      document.getElementById("current_term_display").innerHTML = ghost_split.join("");
     }
     
   }
