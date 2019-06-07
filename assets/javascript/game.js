@@ -24,9 +24,13 @@ document.onkeyup = function (game) {
   // SELECT RANDOM COUNTRY
   var current_term = countries[Math.floor(Math.random()*countries.length)]; 
 
-  // BLANK OUT CURRENT TERM
+  // BLANK OUT CURRENT TERM & create array
   var ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
   document.getElementById("current_term_display").innerHTML = ghost_term;
+  var ghost_split = ghost_term.split("");
+  // COME BACK AND CONCAT THIS
+  document.getElementById("current_term_display").innerHTML = ghost_split;
+
 
 
   // GET EVERY CHARACTER FROM CURRENT TERM, ASSIGN # GUESSES & TRACK USER INPUT
@@ -36,8 +40,13 @@ document.onkeyup = function (game) {
 
   // SEE IF USER INPUT MATCHES ANY CHARACTERS FROM CURRENT TERM
   if (current_term.indexOf(user_guess) !== -1) {
-    document.getElementById("current_term_display").innerHTML = 
-    ghost_term.replace(/-/g,user_guess); 
+    // var position = current_term.indexOf(user_guess);
+    // var ghost_split = ghost_term.split("");
+    ghost_split[current_term.indexOf(user_guess)] = user_guess;
+    document.getElementById("current_term_display").innerHTML = ghost_split;
+    // var spot = ghost_term[current_term.indexOf(user_guess)];
+    // document.getElementById("current_term_display").innerHTML = 
+    // spot.replace("-", user_guess); 
   //  then replace all - marks with user_guess at the positions in split_term where user_guess occcurs
   // occurs that index position with user_guess
   }
@@ -55,6 +64,9 @@ document.onkeyup = function (game) {
   console.log(split_term);
   console.log(number_of_guesses);
   console.log(current_term.indexOf(user_guess));
+  console.log(ghost_term[current_term.indexOf(user_guess)]);
+  console.log(ghost_term);
+  console.log(ghost_split);
   // console.log(checking);
 
 
