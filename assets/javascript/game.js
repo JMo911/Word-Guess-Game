@@ -17,26 +17,24 @@ var country_pics = ["assets/images/Austria.jpeg",
 "assets/images/Switzerland.jpeg",
 "assets/images/United States of America.jpeg"]
 
+var current_term = countries[Math.floor(Math.random()*countries.length)]; 
+var ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
+var ghost_split = ghost_term.split("");
 
 
 
-document.onkeyup = function (game) {
-  // SELECT RANDOM COUNTRY
-  var current_term = countries[Math.floor(Math.random()*countries.length)]; 
+window.onpageshow = function (gameset) {
+  document.getElementById("current_term_display").innerHTML = ghost_split.join("");
+  
+}
 
-  // BLANK OUT CURRENT TERM & create array
-  var ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
-  document.getElementById("current_term_display").innerHTML = ghost_term;
-  var ghost_split = ghost_term.split("");
-  // COME BACK AND CONCAT THIS
-  document.getElementById("current_term_display").innerHTML = ghost_split;
-
-
+document.onkeyup = function(gamerun) {
 
   // GET EVERY CHARACTER FROM CURRENT TERM, ASSIGN # GUESSES & TRACK USER INPUT
   var user_guess = event.key;
   var split_term = current_term.split("");
   var number_of_guesses = 2 * split_term.length;
+  var previous_guesses=[];
 
 
   for (var i = 0; i < split_term.length; i++) {
@@ -44,10 +42,12 @@ document.onkeyup = function (game) {
       ghost_split[i] = user_guess;
       document.getElementById("current_term_display").innerHTML = ghost_split.join("");
     } 
-    else {
-      document.getElementById("current_term_display").innerHTML = ghost_split.join("");
-    }
     
+  }
+
+  if (split_term.indexOf(user_guess) === -1) {
+    previous_guesses.push(user_guess);
+    document.getElementById("previous_guesses_container").innerHTML = user_guess;
   }
 
   // SEE IF USER INPUT MATCHES ANY CHARACTERS FROM CURRENT TERM
@@ -76,6 +76,7 @@ document.onkeyup = function (game) {
       // var position = current_term.indexOf(user_guess);
     // var ghost_split = ghost_term.split("");
   }
+  
 
 
 
