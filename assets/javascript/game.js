@@ -40,8 +40,7 @@ document.onkeyup = function (game) {
 
   // SEE IF USER INPUT MATCHES ANY CHARACTERS FROM CURRENT TERM
   if (current_term.indexOf(user_guess) !== -1) {
-    // var position = current_term.indexOf(user_guess);
-    // var ghost_split = ghost_term.split("");
+
     ghost_split[current_term.indexOf(user_guess)] = user_guess;
     document.getElementById("current_term_display").innerHTML = ghost_split;
     // var spot = ghost_term[current_term.indexOf(user_guess)];
@@ -49,6 +48,10 @@ document.onkeyup = function (game) {
     // spot.replace("-", user_guess); 
   //  then replace all - marks with user_guess at the positions in split_term where user_guess occcurs
   // occurs that index position with user_guess
+
+
+      // var position = current_term.indexOf(user_guess);
+    // var ghost_split = ghost_term.split("");
   }
   
 //   if (checking = true) {
