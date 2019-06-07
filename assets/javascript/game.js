@@ -21,25 +21,27 @@ var current_term = countries[Math.floor(Math.random()*countries.length)];
 var ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
 var ghost_split = ghost_term.split("");
 
-
+// LOAD CURRENT TERM TO THE BROWSER
 
 window.onpageshow = function (gameset) {
   document.getElementById("current_term_display").innerHTML = ghost_split.join("");
   
 }
 
+// INITIATE GAME
+
 document.onkeyup = function(gamerun) {
 
   // GET EVERY CHARACTER FROM CURRENT TERM, ASSIGN # GUESSES & TRACK USER INPUT
   var user_guess = event.key;
-  var split_term = current_term.split("");
+  var split_term = current_term.toLowerCase().split("");
   var number_of_guesses = 2 * split_term.length;
   var previous_guesses=[];
 
 
   for (var i = 0; i < split_term.length; i++) {
     if (user_guess === split_term[i]) {
-      ghost_split[i] = user_guess;
+      ghost_split[i] = current_term[i];
       document.getElementById("current_term_display").innerHTML = ghost_split.join("");
     } 
     
@@ -49,6 +51,16 @@ document.onkeyup = function(gamerun) {
     previous_guesses.push(user_guess);
     document.getElementById("previous_guesses_container").innerHTML = user_guess;
   }
+
+
+
+
+
+
+
+
+
+
 
   // SEE IF USER INPUT MATCHES ANY CHARACTERS FROM CURRENT TERM
   // if (current_term.indexOf(user_guess) !== -1) {
