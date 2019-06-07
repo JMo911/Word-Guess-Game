@@ -42,7 +42,7 @@ document.onkeyup = function (game) {
   for (var i = 0; i < split_term.length; i++) {
     if (user_guess === split_term[i]) {
       ghost_split[i] = user_guess;
-      document.getElementById("current_term_display").innerHTML = ghost_split;
+      document.getElementById("current_term_display").innerHTML = ghost_split.join("");
     }
     
   }
