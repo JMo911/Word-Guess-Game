@@ -38,11 +38,31 @@ document.onkeyup = function (game) {
   var split_term = current_term.split("");
   var number_of_guesses = 2 * split_term.length;
 
-  // SEE IF USER INPUT MATCHES ANY CHARACTERS FROM CURRENT TERM
-  if (current_term.indexOf(user_guess) !== -1) {
 
-    ghost_split[current_term.indexOf(user_guess)] = user_guess;
-    document.getElementById("current_term_display").innerHTML = ghost_split;
+  for (var i = 0; i < split_term.length; i++) {
+    if (user_guess === split_term[i]) {
+      ghost_split[i] = user_guess;
+      document.getElementById("current_term_display").innerHTML = ghost_split;
+    }
+    
+  }
+
+  // SEE IF USER INPUT MATCHES ANY CHARACTERS FROM CURRENT TERM
+  // if (current_term.indexOf(user_guess) !== -1) {
+
+  //   ghost_split[current_term.indexOf(user_guess)] = user_guess;
+  //   document.getElementById("current_term_display").innerHTML = ghost_split;
+    
+    
+  //   var spot = current_term.indexOf(user_guess);
+
+
+
+  //   console.log(current_term);
+    // console.log(spot);
+
+
+
     // var spot = ghost_term[current_term.indexOf(user_guess)];
     // document.getElementById("current_term_display").innerHTML = 
     // spot.replace("-", user_guess); 
@@ -53,23 +73,18 @@ document.onkeyup = function (game) {
       // var position = current_term.indexOf(user_guess);
     // var ghost_split = ghost_term.split("");
   }
-  
-//   if (checking = true) {
-//   var checking = current_term.includes(user_guess);
-
-// }
 
 
 
 
-  console.log(user_guess);
-  console.log(current_term);
-  console.log(split_term);
-  console.log(number_of_guesses);
-  console.log(current_term.indexOf(user_guess));
-  console.log(ghost_term[current_term.indexOf(user_guess)]);
-  console.log(ghost_term);
-  console.log(ghost_split);
+  // console.log(user_guess);
+  // console.log(current_term);
+  // console.log(split_term);
+  // console.log(number_of_guesses);
+  // console.log(current_term.indexOf(user_guess));
+  // console.log(ghost_term[current_term.indexOf(user_guess)]);
+  // console.log(ghost_term);
+  // console.log(ghost_split);
   // console.log(checking);
 
 
@@ -77,7 +92,7 @@ document.onkeyup = function (game) {
   // }
 
 
-}
+// }
 
 
 
