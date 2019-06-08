@@ -57,12 +57,6 @@ document.onkeyup = function(gamerun) {
   var user_guess = event.key;
   if (letters.indexOf(user_guess) !== -1) {var legit_guess = event.key;
   }
-  
-  // if (letters.indexOf(user_guess) !== -1) {
-  //   console.log(user_guess);
-  // }
-
-  // var user_guess = event.key;
 
   // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
   var split_term = current_term.toLowerCase().split("");
@@ -99,9 +93,9 @@ document.onkeyup = function(gamerun) {
   //DISPLAY DECREMENT NUMBER OF GUESSES
   //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
   //WHEN 0, RECORD LOSS
-  
+  if (legit_guess) {
   document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + number_of_guesses--;
-  
+  }
   //if guesses = 0 or if the displayed term has no - marks, then regen random ghost term
   
   
