@@ -83,6 +83,17 @@ document.onkeyup = function game_run(gamerun) {
   var split_term = current_term.toLowerCase().split("");
   
   
+  if (ghost_split.indexOf("-") === -1 && number_of_guesses > 0) {
+    // wins++;
+    document.getElementById("wins_display").innerHTML = "Wins: " + ++wins;
+    document.getElementById("country_pic").src = country_pics[countries.indexOf(current_term)];
+    document.getElementById("country_fact").innerHTML = country_facts[countries.indexOf(current_term)];
+    init();
+  }
+
+  if (ghost_split.indexOf("-") !== -1 && number_of_guesses === 0) {
+    init();
+  }
   
 
 // SEE IF USER GUESS MATCHES ANY OF THE LETTERS IN THE CURRENT WORD, THEN DISPLAY THOSE MATCHES IN BROWSER
@@ -126,21 +137,17 @@ document.onkeyup = function game_run(gamerun) {
 
   
   //THIS IS THE WIN SCENARIO
+
+//SET THE STATIC WIN SCREEN AS A STEP BEFORE RE-INIT
+
+
+
+
   //INCREMENT WINS IF USER GUESSES ALL LETTERS IN WORD BEFORE GUESSES RUN OUT
   //IF THIS HAPPENS, LOAD THE COUNTRIES PICTURE AND FACT
   //DISPLAY PICS AND FACTS IF ALL TERMS FILLED IN BEFORE GUESSES HIT 0
 
-  if (ghost_split.indexOf("-") === -1 && number_of_guesses > 0) {
-    // wins++;
-    document.getElementById("wins_display").innerHTML = "Wins: " + ++wins;
-    document.getElementById("country_pic").src = country_pics[countries.indexOf(current_term)];
-    document.getElementById("country_fact").innerHTML = country_facts[countries.indexOf(current_term)];
-    init();
-  }
 
-  if (ghost_split.indexOf("-") !== -1 && number_of_guesses === 0) {
-    init();
-  }
   
   
   
