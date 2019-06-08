@@ -21,6 +21,10 @@ var current_term = countries[Math.floor(Math.random()*countries.length)];
 var ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
 var ghost_split = ghost_term.split("");
 
+
+//CREATE A GLOBAL ARRAY TO STORE PREVIOUS GUESSES
+var previous_guesses=[];
+
 // LOAD CURRENT TERM TO THE BROWSER
 
 window.onpageshow = function (gameset) {
@@ -47,7 +51,7 @@ document.onkeyup = function(gamerun) {
   // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
   var split_term = current_term.toLowerCase().split("");
   // CREATE ARRAY TO COLLECT PREVIOUS GUESSES
-  var previous_guesses=[];
+  
   // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
   var number_of_guesses = 2 * split_term.length;
   
@@ -66,14 +70,18 @@ document.onkeyup = function(gamerun) {
   //STORE INCORRECT GUESSES IN THE PREVIOUS GUESSES BANK
   if (split_term.indexOf(user_guess) === -1) {
     previous_guesses.push(user_guess);
-    document.getElementById("previous_guesses_container").innerHTML = previous_guesses;
+    document.getElementById("previous_guesses_container").innerHTML = previous_guesses.join(" ");
   }
+
+
+
 
 
 
   
 
 }
+
 
 
 
