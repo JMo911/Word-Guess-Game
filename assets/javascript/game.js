@@ -17,9 +17,16 @@ var country_pics = ["assets/images/Austria.jpeg",
 "assets/images/Switzerland.jpeg",
 "assets/images/United States of America.jpeg"]
 
+var letters = ["a", "b", "c", "d", "e", "f", "g", "h", 
+"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", 
+"u", "v", "w", "x", "y", "z"]
+
 var current_term = countries[Math.floor(Math.random()*countries.length)]; 
 var ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
 var ghost_split = ghost_term.split("");
+
+  // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
+var number_of_guesses = 2 * ghost_term.length;
 
 
 //CREATE A GLOBAL ARRAY TO STORE PREVIOUS GUESSES
@@ -43,23 +50,36 @@ window.onpageshow = function (gameset) {
 
 // INITIATE GAME
 
+
 document.onkeyup = function(gamerun) {
 
-  //STORE USER INPUT,    
+  //STORE USER INPUT IF VALID  
   var user_guess = event.key;
+  if (letters.indexOf(user_guess) !== -1) {var legit_guess = event.key;
+  }
+  
+  // if (letters.indexOf(user_guess) !== -1) {
+  //   console.log(user_guess);
+  // }
+
+  // var user_guess = event.key;
 
   // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
   var split_term = current_term.toLowerCase().split("");
-  // CREATE ARRAY TO COLLECT PREVIOUS GUESSES
   
-  // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
-  var number_of_guesses = 2 * split_term.length;
+
+  // CREATE VAR TO SEARCH FOR ALL LETTERS
+  // var letters = /^[A-Za-z]+$/;
+  
   
 
 // SEE IF USER GUESS MATCHES ANY OF THE LETTERS IN THE CURRENT WORD, THEN DISPLAY THOSE MATCHES IN BROWSER
 
+
+
+
   for (var i = 0; i < split_term.length; i++) {
-    if (user_guess === split_term[i]) {
+    if (legit_guess === split_term[i]) {
       ghost_split[i] = current_term[i];
       document.getElementById("current_term_display").innerHTML = ghost_split.join("");
     } 
@@ -68,11 +88,26 @@ document.onkeyup = function(gamerun) {
 
 
   //STORE INCORRECT GUESSES IN THE PREVIOUS GUESSES BANK
-  if (split_term.indexOf(user_guess) === -1) {
-    previous_guesses.push(user_guess);
+  //remove duplicates and non letter characters
+  if (split_term.indexOf(legit_guess) === -1){ 
+  // && previous_guesses.indexOf(user_guess) !== -1) 
+    previous_guesses.push(legit_guess);
     document.getElementById("previous_guesses_container").innerHTML = previous_guesses.join(" ");
   }
 
+  
+  //DISPLAY DECREMENT NUMBER OF GUESSES
+  //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
+  //WHEN 0, RECORD LOSS
+  
+  document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + number_of_guesses--;
+  
+  //if guesses = 0 or if the displayed term has no - marks, then regen random ghost term
+  
+  
+  
+  
+  //DISPLAY PICS AND FACTS IF ALL TERMS FILLED IN
 
 
 
