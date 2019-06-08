@@ -39,7 +39,7 @@ function init() {
   ghost_split = ghost_term.split("");
 
     // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
-  number_of_guesses = 2 * ghost_term.length;
+  number_of_guesses = Math.floor(1.4 * ghost_term.length);
 
 
   //CREATE A GLOBAL ARRAY TO STORE PREVIOUS GUESSES
@@ -57,12 +57,6 @@ var wins = 0;
 //callback function: function provided to code.. it knows to execute the function once this happens
 
 window.onpageshow = init;
-
-
-
-
-
-
 
 
 
@@ -170,139 +164,4 @@ document.onkeyup = function game_run(gamerun) {
 
 
 
-  // SEE IF USER INPUT MATCHES ANY CHARACTERS FROM CURRENT TERM
-  // if (current_term.indexOf(user_guess) !== -1) {
-
-  //   ghost_split[current_term.indexOf(user_guess)] = user_guess;
-  //   document.getElementById("current_term_display").innerHTML = ghost_split;
-    
-    
-  //   var spot = current_term.indexOf(user_guess);
-
-
-
-  //   console.log(current_term);
-    // console.log(spot);
-
-
-
-    // var spot = ghost_term[current_term.indexOf(user_guess)];
-    // document.getElementById("current_term_display").innerHTML = 
-    // spot.replace("-", user_guess); 
-  //  then replace all - marks with user_guess at the positions in split_term where user_guess occcurs
-  // occurs that index position with user_guess
-
-
-      // var position = current_term.indexOf(user_guess);
-    // var ghost_split = ghost_term.split("");
   
-  
-
-
-
-
-  // console.log(user_guess);
-  // console.log(current_term);
-  // console.log(split_term);
-  // console.log(number_of_guesses);
-  // console.log(current_term.indexOf(user_guess));
-  // console.log(ghost_term[current_term.indexOf(user_guess)]);
-  // console.log(ghost_term);
-  // console.log(ghost_split);
-  // console.log(checking);
-
-
-    // for (i = 0; i < split_term.length, i++) {
-  // }
-
-
-// }
-
-
-
-
-
-
-// function random_countries (jacob) {
-// return countries[Math.floor(Math.random()*countries.length-1)];
-// }
-
-// console.log(random_countries(countries));
-
-// var current_term = random_countries(countries);
-// var current_length = current_term.length;
-// var current_position = countries.lastIndexOf(current_term);
-// var current_fact = country_facts[current_position];
-// var current_pic = country_pics[current_position];
-
-
-// function import_current_term() {
-// document.getElementById("current_term_display").innerHTML = current_term;
-// document.getElementById("country_fact").innerHTML = current_fact;
-
-// }
-
-// function import_current_fact() {
-// document.getElementById("country_fact").innerHTML = current_fact;
-// }
-
-
-// function import_current_pic() {
-// document.getElementById("country_pic").src = current_pic;
-// }
-
-// // Testing section - code above works
-
-// function myFunction() {
-// var term = document.getElementById("current_term_display").innerHTML;
-// var res = term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
-// document.getElementById("current_term_display").innerHTML = res;
-// }
-
-// document.onkeyup = function (event){
-// var key_code = event.keyCode;
-// var user_input = String.fromCharCode(key_code);
-// console.log(user_input);
-// }
-
-
-// function start_game (event){
-// var wins = 0;
-// var losses = 0;
-
-// }
-
-// // onkeyup decrement guesses
-
-// function while_game (event) {
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
