@@ -95,9 +95,17 @@ document.onkeyup = function game_run(gamerun) {
   //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
   //WHEN 0, RESET
   // for (var i = number_of_guesses; i > 0; i--) {
-  if (legit_guess && number_of_guesses >=0) {
+  if (legit_guess && number_of_guesses > 0) {
   document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + number_of_guesses--;
 
+  }
+
+  if (number_of_guesses === 0 || ghost_split.indexOf("-") === -1) {
+    var new_term = countries[Math.floor(Math.random()*countries.length)]; 
+    document.getElementById("current_term_display").innerHTML = new_term;
+
+    var new_guesses = 2 * new_term.length;
+    document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + new_guesses;
   }
 // }
   //if guesses = 0 or if the displayed term has no - marks, then regen random ghost term
