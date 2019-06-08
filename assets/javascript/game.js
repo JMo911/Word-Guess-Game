@@ -51,19 +51,18 @@ window.onpageshow = function (gameset) {
 // INITIATE GAME
 
 
-document.onkeyup = function(gamerun) {
+document.onkeyup = function game_function (gamerun) {
 
   //STORE USER INPUT IF VALID  
   var user_guess = event.key;
+  
+  
   if (letters.indexOf(user_guess) !== -1) {var legit_guess = event.key;
   }
 
   // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
   var split_term = current_term.toLowerCase().split("");
   
-
-  // CREATE VAR TO SEARCH FOR ALL LETTERS
-  // var letters = /^[A-Za-z]+$/;
   
   
 
@@ -83,8 +82,10 @@ document.onkeyup = function(gamerun) {
 
   //STORE INCORRECT GUESSES IN THE PREVIOUS GUESSES BANK
   //remove duplicates and non letter characters
+  //userguess and legit_guess returning undefined
   if (split_term.indexOf(legit_guess) === -1){ 
   // && previous_guesses.indexOf(user_guess) !== -1) 
+  
     previous_guesses.push(legit_guess);
     document.getElementById("previous_guesses_container").innerHTML = previous_guesses.join(" ");
   }
@@ -92,11 +93,16 @@ document.onkeyup = function(gamerun) {
   
   //DISPLAY DECREMENT NUMBER OF GUESSES
   //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
-  //WHEN 0, RECORD LOSS
+  //WHEN 0, RESET
   if (legit_guess) {
   document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + number_of_guesses--;
   }
   //if guesses = 0 or if the displayed term has no - marks, then regen random ghost term
+  //index of "-" === -1
+
+  if (number_of_guesses === 0) {
+    current_term.reset();
+  }
   
   
   
