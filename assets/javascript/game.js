@@ -76,8 +76,8 @@ document.onkeyup = function game_run(gamerun) {
   // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
   var split_term = current_term.toLowerCase().split("");
   
-  
-  if (ghost_split.indexOf("-") === -1 && number_of_guesses > 0) {
+  //WIN SCENARIO
+  if (ghost_split.indexOf("-") === -1 && number_of_guesses >= 0) {
     // wins++;
     document.getElementById("wins_display").innerHTML = "Wins: " + ++wins;
     document.getElementById("country_pic").src = country_pics[countries.indexOf(current_term)];
@@ -85,8 +85,11 @@ document.onkeyup = function game_run(gamerun) {
     init();
   }
 
+//LOSE SCENARIO
+
   if (ghost_split.indexOf("-") !== -1 && number_of_guesses === 0) {
     init();
+    //CHANGE DISPLAYS FOR COUNTRY FACT/PIC HERE TO PROMPT USER TO BEGIN GUESSING AGAIN FOR A NEW COUNTRY
   }
   
 
@@ -104,6 +107,18 @@ document.onkeyup = function game_run(gamerun) {
   }
 
 
+  //DISPLAY DECREMENT NUMBER OF GUESSES
+  //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
+  //WHEN 0, RESET
+  // for (var i = number_of_guesses; i > 0; i--) {
+
+    if (legit_guess && number_of_guesses > 0 && 
+      previous_guesses.indexOf(user_guess) === -1) {
+    document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + number_of_guesses--;
+  
+    }
+
+
   //STORE INCORRECT GUESSES IN THE PREVIOUS GUESSES BANK
   //remove duplicates and non letter characters
   //userguess and legit_guess returning undefined
@@ -117,14 +132,7 @@ document.onkeyup = function game_run(gamerun) {
   
 
 
-  //DISPLAY DECREMENT NUMBER OF GUESSES
-  //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
-  //WHEN 0, RESET
-  // for (var i = number_of_guesses; i > 0; i--) {
-  if (legit_guess && number_of_guesses > 0) {
-  document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + number_of_guesses--;
 
-  }
 
   //if guesses = 0 or if the displayed term has no - marks, then regen random ghost term
   //index of "-" === -1
