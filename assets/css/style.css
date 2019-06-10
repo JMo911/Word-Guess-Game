@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:800i&display=swap');
+
+
+
+h1{
+    font-family: 'Open Sans', sans-serif;
+}
+
+h2{
+
+}
+
+.container-fluid{
+    background-color: aqua;
+    height: 100vh;
+}
+
+#globegif{
+    margin-top: 2em;
+    border: 0.2em navy solid;
+    border-radius: 1em;
+    scale: 3;
+}
+
+#row3{
+    margin-top: 3.5em;
+}
+
+#row4{
+    margin-top: 3.5em;
+}
+
+
+#country_pic{
+    border-radius: 1em;
+    border: 0.2em navy solid;
+}

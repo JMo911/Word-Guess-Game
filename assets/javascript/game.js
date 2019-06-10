@@ -34,6 +34,10 @@ var number_of_guesses;
 var previous_guesses;
 
 function init() {
+    //CREATE A GLOBAL ARRAY TO STORE PREVIOUS GUESSES
+    previous_guesses=[];
+    document.getElementById("previous_guesses_container").innerHTML = previous_guesses.join(" ");
+
   current_term = countries[Math.floor(Math.random()*countries.length)]; 
   ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
   ghost_split = ghost_term.split("");
@@ -43,19 +47,17 @@ function init() {
 
     // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
     if (current_term !== "UNITED STATES OF AMERICA") {
-  number_of_guesses = Math.floor(1.2 * ghost_term.length);
+  number_of_guesses = Math.floor(2 * ghost_term.length);
     }
 
     if (current_term === "UNITED STATES OF AMERICA") {
-      number_of_guesses = Math.floor(0.5 * ghost_term.length);
+      number_of_guesses = Math.floor(ghost_term.length);
         }
 
   document.getElementById("guesses_display").innerHTML= "Number of Guesses Remaining: " + number_of_guesses;
 
 
-  //CREATE A GLOBAL ARRAY TO STORE PREVIOUS GUESSES
-  previous_guesses=[];
-  document.getElementById("previous_guesses_container").innerHTML = previous_guesses.join(" ");
+
 
 
 }
@@ -81,34 +83,25 @@ document.onkeyup = function game_run(gamerun) {
   var user_guess = event.key;
   
   
-  if (letters.indexOf(user_guess) !== -1) {var legit_guess = event.key.toUpperCase();
+  if (letters.indexOf(user_guess.toUpperCase()) !== -1) {var legit_guess = event.key.toUpperCase();
   }
 
   // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
   var split_term = current_term.split("");
   
   
-  //WIN SCENARIO
-  //SET THE STATIC WIN SCREEN AS A STEP BEFORE RE-INIT
-  //INCREMENT WINS IF USER GUESSES ALL LETTERS IN WORD BEFORE GUESSES RUN OUT
-  //IF THIS HAPPENS, LOAD THE COUNTRIES PICTURE AND FACT
-  //DISPLAY PICS AND FACTS IF ALL TERMS FILLED IN BEFORE GUESSES HIT 0
+
   
-  if (ghost_split.indexOf("-") === -1 && number_of_guesses >= 1) {
-    document.getElementById("wins_display").innerHTML = "Wins: " + ++wins;
-    document.getElementById("country_pic").src = country_pics[countries.indexOf(current_term)];
-    document.getElementById("country_fact").innerHTML = country_facts[countries.indexOf(current_term)];
-    init();
-  }
+    //DISPLAY DECREMENT NUMBER OF GUESSES
+  //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
+  //WHEN 0, RESET
+  // for (var i = number_of_guesses; i > 0; i--) {
 
-//LOSE SCENARIO
-
-  if (ghost_split.indexOf("-") !== -1 && number_of_guesses === 0) {
-    init();
-    //CHANGE DISPLAYS FOR COUNTRY FACT/PIC HERE TO PROMPT USER TO BEGIN GUESSING AGAIN FOR A NEW COUNTRY
-  }
+    if (legit_guess && number_of_guesses > 0 && 
+      previous_guesses.indexOf(legit_guess) === -1 && ghost_split.indexOf(legit_guess) === -1) {
+    document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + --number_of_guesses;
   
-
+    }
 
 
 
@@ -128,16 +121,7 @@ document.onkeyup = function game_run(gamerun) {
     
   }
 
-    //DISPLAY DECREMENT NUMBER OF GUESSES
-  //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
-  //WHEN 0, RESET
-  // for (var i = number_of_guesses; i > 0; i--) {
 
-    if (legit_guess && number_of_guesses > 0 && 
-      previous_guesses.indexOf(legit_guess) === -1 && ghost_split.indexOf(legit_guess) === -1) {
-    document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + --number_of_guesses;
-  
-    }
 
 
 
@@ -155,7 +139,25 @@ document.onkeyup = function game_run(gamerun) {
   }
 
   
+  //WIN SCENARIO
+  //SET THE STATIC WIN SCREEN AS A STEP BEFORE RE-INIT
+  //INCREMENT WINS IF USER GUESSES ALL LETTERS IN WORD BEFORE GUESSES RUN OUT
+  //IF THIS HAPPENS, LOAD THE COUNTRIES PICTURE AND FACT
+  //DISPLAY PICS AND FACTS IF ALL TERMS FILLED IN BEFORE GUESSES HIT 0
+  
+  if (ghost_split.indexOf("-") === -1 && number_of_guesses >= 0) {
+    document.getElementById("wins_display").innerHTML = "Wins: " + ++wins;
+    document.getElementById("country_pic").src = country_pics[countries.indexOf(current_term)];
+    document.getElementById("country_fact").innerHTML = country_facts[countries.indexOf(current_term)];
+    init();
+  }
 
+//LOSE SCENARIO
+
+  if (ghost_split.indexOf("-") !== -1 && number_of_guesses < 0) {
+    init();
+    //CHANGE DISPLAYS FOR COUNTRY FACT/PIC HERE TO PROMPT USER TO BEGIN GUESSING AGAIN FOR A NEW COUNTRY
+  }
 
 
 
