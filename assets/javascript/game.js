@@ -40,10 +40,12 @@ function init() {
 
     // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
   number_of_guesses = Math.floor(1.4 * ghost_term.length);
+  document.getElementById("guesses_display").innerHTML= "Number of Guesses Remaining: " + number_of_guesses;
 
 
   //CREATE A GLOBAL ARRAY TO STORE PREVIOUS GUESSES
   previous_guesses=[];
+  document.getElementById("previous_guesses_container").innerHTML = previous_guesses.join(" ");
 
   //DIPLAYING DASHED TERM IN DOM
   document.getElementById("current_term_display").innerHTML = ghost_split.join("");
@@ -76,7 +78,13 @@ document.onkeyup = function game_run(gamerun) {
   // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
   var split_term = current_term.toLowerCase().split("");
   
+  
   //WIN SCENARIO
+  //SET THE STATIC WIN SCREEN AS A STEP BEFORE RE-INIT
+  //INCREMENT WINS IF USER GUESSES ALL LETTERS IN WORD BEFORE GUESSES RUN OUT
+  //IF THIS HAPPENS, LOAD THE COUNTRIES PICTURE AND FACT
+  //DISPLAY PICS AND FACTS IF ALL TERMS FILLED IN BEFORE GUESSES HIT 0
+  
   if (ghost_split.indexOf("-") === -1 && number_of_guesses >= 0) {
     // wins++;
     document.getElementById("wins_display").innerHTML = "Wins: " + ++wins;
@@ -93,7 +101,13 @@ document.onkeyup = function game_run(gamerun) {
   }
   
 
-// SEE IF USER GUESS MATCHES ANY OF THE LETTERS IN THE CURRENT WORD, THEN DISPLAY THOSE MATCHES IN BROWSER
+
+
+
+
+
+
+  // SEE IF USER GUESS MATCHES ANY OF THE LETTERS IN THE CURRENT WORD, THEN DISPLAY THOSE MATCHES IN BROWSER
 
 
 
@@ -106,17 +120,20 @@ document.onkeyup = function game_run(gamerun) {
     
   }
 
-
-  //DISPLAY DECREMENT NUMBER OF GUESSES
+    //DISPLAY DECREMENT NUMBER OF GUESSES
   //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
   //WHEN 0, RESET
   // for (var i = number_of_guesses; i > 0; i--) {
 
     if (legit_guess && number_of_guesses > 0 && 
-      previous_guesses.indexOf(user_guess) === -1) {
+      previous_guesses.indexOf(legit_guess) === -1 && ghost_split.indexOf(legit_guess) === -1) {
     document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + number_of_guesses--;
   
     }
+
+
+
+
 
 
   //STORE INCORRECT GUESSES IN THE PREVIOUS GUESSES BANK
@@ -138,16 +155,7 @@ document.onkeyup = function game_run(gamerun) {
   //index of "-" === -1
 
   
-  //THIS IS THE WIN SCENARIO
 
-//SET THE STATIC WIN SCREEN AS A STEP BEFORE RE-INIT
-
-
-
-
-  //INCREMENT WINS IF USER GUESSES ALL LETTERS IN WORD BEFORE GUESSES RUN OUT
-  //IF THIS HAPPENS, LOAD THE COUNTRIES PICTURE AND FACT
-  //DISPLAY PICS AND FACTS IF ALL TERMS FILLED IN BEFORE GUESSES HIT 0
 
 
   
