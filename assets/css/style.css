@@ -4,6 +4,10 @@
 
 h1{
     font-family: 'Open Sans', sans-serif;
+    background: -webkit-linear-gradient(white, navy);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0.5em;
 }
 
 h2{
@@ -19,7 +23,7 @@ h2{
     margin-top: 2em;
     border: 0.2em navy solid;
     border-radius: 1em;
-    scale: 3;
+    height;
 }
 
 #row3{
@@ -27,7 +31,7 @@ h2{
 }
 
 #row4{
-    margin-top: 3.5em;
+    margin-top: 0;
 }
 
 
