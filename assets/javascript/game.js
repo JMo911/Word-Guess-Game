@@ -21,16 +21,11 @@ var letters = ["A", "B", "C", "D", "E", "F", "G", "H",
 "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
 "U", "V", "W", "X", "Y", "Z"]
 
-//only define variables here, but then set them in the function
+//DEFINE GLOBAL VARIABLES TO SET IN INIT FUNCTION
 var current_term; 
 var ghost_term;
 var ghost_split;
-
-  // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
 var number_of_guesses;
-
-
-//CREATE A GLOBAL ARRAY TO STORE PREVIOUS GUESSES
 var previous_guesses;
 
 function init() {
@@ -38,26 +33,23 @@ function init() {
     previous_guesses=[];
     document.getElementById("previous_guesses_container").innerHTML = previous_guesses.join(" ");
 
-  current_term = countries[Math.floor(Math.random()*countries.length)]; 
-  ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
-  ghost_split = ghost_term.split("");
+    current_term = countries[Math.floor(Math.random()*countries.length)]; 
+    ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
+    ghost_split = ghost_term.split("");
 
     //DIPLAYING DASHED TERM IN DOM
     document.getElementById("current_term_display").innerHTML = ghost_split.join("");
 
     // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
     if (current_term !== "UNITED STATES OF AMERICA") {
-  number_of_guesses = Math.floor(2 * ghost_term.length);
-    }
+      number_of_guesses = Math.floor(2 * ghost_term.length);
+      }
 
     if (current_term === "UNITED STATES OF AMERICA") {
-      number_of_guesses = Math.floor(ghost_term.length);
-        }
+      number_of_guesses = Math.floor(0.7 * ghost_term.length);
+      }
 
   document.getElementById("guesses_display").innerHTML= "Number of Guesses Remaining: " + number_of_guesses;
-
-
-
 
 
 }
@@ -66,16 +58,13 @@ function init() {
 //SET INITIAL WINS
 var wins = 0;
 
-// LOAD CURRENT TERM TO THE BROWSER
+//INITIAL BROSWER LOAD
 //callback function: function provided to code.. it knows to execute the function once this happens
 
 window.onpageshow = init;
 
 
-
-
 // INITIATE GAME
-
 
 document.onkeyup = function game_run(gamerun) {
 
@@ -86,32 +75,21 @@ document.onkeyup = function game_run(gamerun) {
   if (letters.indexOf(user_guess.toUpperCase()) !== -1) {var legit_guess = event.key.toUpperCase();
   }
 
-  // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
+  // CREATE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
   var split_term = current_term.split("");
-  
-  
 
   
-    //DISPLAY DECREMENT NUMBER OF GUESSES
+  //DISPLAY DECREMENT NUMBER OF GUESSES
   //IF USER GUESS CONTRIBUTES A LETTER TO THE TERM, OR TO PREVIOUS GUESSES, THEN DECREMENT
   //WHEN 0, RESET
-  // for (var i = number_of_guesses; i > 0; i--) {
 
-    if (legit_guess && number_of_guesses > 0 && 
+    if (legit_guess && number_of_guesses > -1 && 
       previous_guesses.indexOf(legit_guess) === -1 && ghost_split.indexOf(legit_guess) === -1) {
     document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + --number_of_guesses;
   
     }
 
-
-
-
-
-
   // SEE IF USER GUESS MATCHES ANY OF THE LETTERS IN THE CURRENT WORD, THEN DISPLAY THOSE MATCHES IN BROWSER
-
-
-
 
   for (var i = 0; i < split_term.length; i++) {
     if (legit_guess === split_term[i]) {
@@ -120,13 +98,6 @@ document.onkeyup = function game_run(gamerun) {
     } 
     
   }
-
-
-
-
-
-
-
 
   //STORE INCORRECT GUESSES IN THE PREVIOUS GUESSES BANK
   //remove duplicates and non letter characters
@@ -156,29 +127,7 @@ document.onkeyup = function game_run(gamerun) {
 
   if (ghost_split.indexOf("-") !== -1 && number_of_guesses < 0) {
     init();
-    //CHANGE DISPLAYS FOR COUNTRY FACT/PIC HERE TO PROMPT USER TO BEGIN GUESSING AGAIN FOR A NEW COUNTRY
   }
-
-
-
-  //if guesses = 0 or if the displayed term has no - marks, then regen random ghost term
-  //index of "-" === -1
-
-  
-
-
-
-  
-  
-  
-  //init function - happen at start of every game
-  
-
-
-
-
-
-  
 
 }
 
