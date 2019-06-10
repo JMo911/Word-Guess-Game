@@ -1,5 +1,5 @@
-var countries = ["Austria", "Costa Rica", "Egypt", "India", "Spain",
-"Switzerland", "United States of America"]
+var countries = ["AUSTRIA", "COSTA RICA", "EGYPT", "INDIA", "SPAIN",
+"SWITZERLAND", "UNITED STATES OF AMERICA"]
 
 var country_facts = ["8,751,820 people live in Austria. German is the official language.",
 "The official language of Costa Rica is Spanish. Native Costa Ricans call themselves ticos and ticas.",
@@ -17,9 +17,9 @@ var country_pics = ["assets/images/Austria.jpeg",
 "assets/images/Switzerland.jpeg",
 "assets/images/United States of America.jpeg"]
 
-var letters = ["a", "b", "c", "d", "e", "f", "g", "h", 
-"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", 
-"u", "v", "w", "x", "y", "z"]
+var letters = ["A", "B", "C", "D", "E", "F", "G", "H", 
+"I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
+"U", "V", "W", "X", "Y", "Z"]
 
 //only define variables here, but then set them in the function
 var current_term; 
@@ -38,8 +38,18 @@ function init() {
   ghost_term = current_term.replace(/a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z/gi, "-");
   ghost_split = ghost_term.split("");
 
+    //DIPLAYING DASHED TERM IN DOM
+    document.getElementById("current_term_display").innerHTML = ghost_split.join("");
+
     // CREATE DYNAMIC NUMBER OF STARTING GUESSES CONTINGENT ON CURRENT TERM
-  number_of_guesses = Math.floor(1.4 * ghost_term.length);
+    if (current_term !== "UNITED STATES OF AMERICA") {
+  number_of_guesses = Math.floor(1.2 * ghost_term.length);
+    }
+
+    if (current_term === "UNITED STATES OF AMERICA") {
+      number_of_guesses = Math.floor(0.5 * ghost_term.length);
+        }
+
   document.getElementById("guesses_display").innerHTML= "Number of Guesses Remaining: " + number_of_guesses;
 
 
@@ -47,8 +57,7 @@ function init() {
   previous_guesses=[];
   document.getElementById("previous_guesses_container").innerHTML = previous_guesses.join(" ");
 
-  //DIPLAYING DASHED TERM IN DOM
-  document.getElementById("current_term_display").innerHTML = ghost_split.join("");
+
 }
 
 
@@ -72,11 +81,11 @@ document.onkeyup = function game_run(gamerun) {
   var user_guess = event.key;
   
   
-  if (letters.indexOf(user_guess) !== -1) {var legit_guess = event.key;
+  if (letters.indexOf(user_guess) !== -1) {var legit_guess = event.key.toUpperCase();
   }
 
   // CREATE CASE INSENSITIVE ARRAY TO MATCH USER GUESSES TO CURRENT TERM
-  var split_term = current_term.toLowerCase().split("");
+  var split_term = current_term.split("");
   
   
   //WIN SCENARIO
@@ -85,8 +94,7 @@ document.onkeyup = function game_run(gamerun) {
   //IF THIS HAPPENS, LOAD THE COUNTRIES PICTURE AND FACT
   //DISPLAY PICS AND FACTS IF ALL TERMS FILLED IN BEFORE GUESSES HIT 0
   
-  if (ghost_split.indexOf("-") === -1 && number_of_guesses >= 0) {
-    // wins++;
+  if (ghost_split.indexOf("-") === -1 && number_of_guesses >= 1) {
     document.getElementById("wins_display").innerHTML = "Wins: " + ++wins;
     document.getElementById("country_pic").src = country_pics[countries.indexOf(current_term)];
     document.getElementById("country_fact").innerHTML = country_facts[countries.indexOf(current_term)];
@@ -127,7 +135,7 @@ document.onkeyup = function game_run(gamerun) {
 
     if (legit_guess && number_of_guesses > 0 && 
       previous_guesses.indexOf(legit_guess) === -1 && ghost_split.indexOf(legit_guess) === -1) {
-    document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + number_of_guesses--;
+    document.getElementById("guesses_display").innerHTML = "Number of Guesses Remaining: " + --number_of_guesses;
   
     }
 
@@ -139,7 +147,7 @@ document.onkeyup = function game_run(gamerun) {
   //STORE INCORRECT GUESSES IN THE PREVIOUS GUESSES BANK
   //remove duplicates and non letter characters
   //userguess and legit_guess returning undefined
-  if (split_term.indexOf(legit_guess) === -1 && previous_guesses.indexOf(user_guess) === -1){ 
+  if (split_term.indexOf(legit_guess) === -1 && previous_guesses.indexOf(legit_guess) === -1){ 
  
   
     previous_guesses.push(legit_guess);
